@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
-import User from "./user";
+import User from "./user.js";
 
 const NoteSchema = new mongoose.Schema(
     {
         title: {
             type: String,
-            default: "",
+            required: true,
         },
         body: {
             type: String,

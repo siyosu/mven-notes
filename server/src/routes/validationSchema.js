@@ -64,3 +64,19 @@ export const userLoginSchema = {
         },
     },
 };
+
+/**
+ * Sanitize user input
+ */
+export const newNoteSchema = {
+    title: {
+        notEmpty: true,
+        errorMessage: "Note title cannot be empty",
+        escape: true,
+    },
+    body: {
+        notEmpty: true,
+        errorMessage: "Note body cannot be empty",
+        escape: true,
+    },
+};
