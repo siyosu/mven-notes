@@ -1,3 +1,4 @@
+import cors from "cors";
 import { Router } from "express";
 import createHttpError from "http-errors";
 import jwt from "jsonwebtoken";
@@ -5,6 +6,7 @@ import auth from "./auth.js";
 import notes from "./notes.js";
 const router = Router();
 
+router.use(cors({ origin: "*" }));
 router.use("/auth", auth);
 router.use("/notes", notes);
 
