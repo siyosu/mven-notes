@@ -11,6 +11,7 @@ const ApiClient = axios.create({
 })
 
 const handleAuthError = (error: unknown) => {
+  console.error(error)
   if (error instanceof AxiosError) {
     if (error.status === 500 || !error.response || !error.response.data) {
       throw error

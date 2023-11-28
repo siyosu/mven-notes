@@ -1,4 +1,4 @@
-export interface InvalidInputError {
+interface InvalidInputError {
   message: string
   errors: {
     [key: string]: {
@@ -12,11 +12,17 @@ export interface InvalidInputError {
 }
 
 export class RegisterError extends Error {
-  errors: InvalidInputError['errors']
+  errors: { [key: string]: string }
   constructor(error: InvalidInputError) {
     super(error.message)
     this.name = 'RegisterError'
-    this.errors = error.errors
+    const mappedErrors: { [key: string]: string } = {}
+
+    Object.keys(error.errors).forEach((key) => {
+      mappedErrors[key] = error.errors[key].msg
+    })
+
+    this.errors = mappedErrors
   }
 }
 
