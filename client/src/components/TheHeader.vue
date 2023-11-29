@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import { useUserStore } from '@/stores/user'
 import { onClickOutside } from '@vueuse/core'
-import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
 import NavBar from './NavBar.vue'
 
-const store = useUserStore()
-const { isLoggedIn } = storeToRefs(store)
+const user = useUserStore()
 
 const showNav = ref(false)
 const toggleNav = () => {
@@ -27,14 +25,14 @@ onClickOutside(
 </script>
 
 <template>
-  <header class="sticky top-0 w-full border-b bg-background">
+  <header class="sticky top-0 w-full overflow-x-clip border-b bg-background">
     <div class="container">
       <div class="relative flex items-center justify-between py-6">
-        <a class="text-2xl font-bold uppercase" href="#">Notes</a>
+        <RouterLink :to="{ name: 'home' }" class="text-2xl font-bold uppercase">Notes</RouterLink>
 
         <button
           ref="navToggle"
-          v-if="isLoggedIn"
+          v-if="user.isLoggedIn"
           @click="toggleNav"
           class="flex h-5 w-10 flex-col justify-between sm:hidden"
         >
@@ -48,7 +46,7 @@ onClickOutside(
           ></span>
         </button>
 
-        <NavBar v-if="isLoggedIn" ref="navBar" :show="showNav" />
+        <NavBar v-if="user.isLoggedIn" ref="navBar" :show="showNav" />
       </div>
     </div>
   </header>

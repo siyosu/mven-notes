@@ -73,6 +73,6 @@
     @apply border-border;
   }
   body {
-    @apply overflow-x-clip bg-background font-inter text-foreground scrollbar-thin scrollbar-track-background scrollbar-thumb-accent scrollbar-thumb-rounded;
+    @apply overflow-x-clip bg-background font-inter text-foreground scrollbar-thin scrollbar-track-background scrollbar-thumb-slate-500 scrollbar-thumb-rounded dark:scrollbar-thumb-accent;
   }
 }

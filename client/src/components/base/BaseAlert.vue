@@ -12,7 +12,7 @@ withDefaults(
 
 const variantsClass = {
   default: 'bg-secondary text-secondary-foreground',
-  success: 'bg-teal-500 dark:bg-teal-700 text-foreground',
+  success: 'bg-teal-500 dark:bg-teal-700 text-primary-foreground',
   danger: 'bg-destructive text-destructive-foreground'
 }
 </script>
