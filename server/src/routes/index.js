@@ -19,7 +19,9 @@ router.use((err, req, res, next) => {
     const error = { message: err.message ?? "Unknown error occurred" };
     err.errors && (error.errors = err.errors);
 
-    if (err instanceof jwt.JsonWebTokenError) {
+    if (err instanceof jwt.TokenExpiredError) {
+        res.status(401).send({ message: "Session Expired" });
+    } else if (err instanceof jwt.JsonWebTokenError) {
         res.status(401).send({ message: "Unauthorized" });
     } else {
         res.status(status).send(error);
