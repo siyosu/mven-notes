@@ -20,9 +20,13 @@ export const useUserStore = defineStore('user', () => {
     router.push({ name: 'home' })
   }
 
-  const logOut = () => {
+  const logOut = (message?: string) => {
     user.value = null
-    router.push({ name: 'login' })
+    if (message) {
+      router.push({ name: 'login', query: { msg: message } })
+    } else {
+      router.push({ name: 'login' })
+    }
   }
 
   return { user: readonly(user), isLoggedIn, setUser, logOut }

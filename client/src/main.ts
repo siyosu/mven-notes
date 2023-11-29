@@ -12,9 +12,11 @@ import {
   faNoteSticky,
   faRightFromBracket,
   faSun,
-  faMoon
+  faMoon,
+  faTrash,
+  faPenToSquare
 } from '@fortawesome/free-solid-svg-icons'
-library.add(faHome, faNoteSticky, faRightFromBracket, faSun, faMoon)
+library.add(faHome, faNoteSticky, faRightFromBracket, faSun, faMoon, faTrash, faPenToSquare)
 
 import App from './App.vue'
 import router from './router'

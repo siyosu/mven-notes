@@ -1,4 +1,10 @@
-import { NetworkError, NotFoundError, UnauthorizedError, ValidationError } from '@/error/api'
+import {
+  NetworkError,
+  NotFoundError,
+  SessionExpiredError,
+  UnauthorizedError,
+  ValidationError
+} from '@/error/api'
 import axios, { AxiosError } from 'axios'
 import { useNProgress } from '@vueuse/integrations/useNProgress'
 
@@ -54,6 +60,9 @@ ApiClient.interceptors.response.use(
     const { status, data } = error.response
     if (status === 400 && data.errors) {
       throw new ValidationError(data)
+    }
+    if (status === 401 && data.message === 'Session Expired') {
+      throw new SessionExpiredError(data.message)
     }
     if (status === 401) {
       throw new UnauthorizedError(data.message)
