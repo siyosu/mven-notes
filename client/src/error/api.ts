@@ -10,12 +10,18 @@ interface InvalidInputError {
     }
   }
 }
+export class NetworkError extends Error {
+  constructor(message: string) {
+    super(message)
+    this.name = 'NetworkError'
+  }
+}
 
-export class RegisterError extends Error {
+export class ValidationError extends Error {
   errors: { [key: string]: string }
   constructor(error: InvalidInputError) {
     super(error.message)
-    this.name = 'RegisterError'
+    this.name = 'ValidationError'
     const mappedErrors: { [key: string]: string } = {}
 
     Object.keys(error.errors).forEach((key) => {
@@ -26,9 +32,15 @@ export class RegisterError extends Error {
   }
 }
 
-export class LoginError extends Error {
+export class UnauthorizedError extends Error {
   constructor(message: string) {
     super(message)
-    this.name = 'LoginError'
+    this.name = 'UnauthorizedError'
+  }
+}
+export class NotFoundError extends Error {
+  constructor(message: string) {
+    super(message)
+    this.name = 'NotFoundError'
   }
 }

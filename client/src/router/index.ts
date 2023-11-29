@@ -33,9 +33,9 @@ const { isLoading } = useNProgress()
 router.beforeEach((to, from, next) => {
   const store = useUserStore()
   isLoading.value = true
-  if (to.matched.some((target) => target.meta.auth) && !store.user) {
+  if (to.matched.some((target) => target.meta.auth) && !store.isLoggedIn) {
     return next({ name: 'login' })
-  } else if ((to.name === 'login' || to.name === 'register') && store.user) {
+  } else if ((to.name === 'login' || to.name === 'register') && store.isLoggedIn) {
     return next({ name: 'home' })
   }
   next()

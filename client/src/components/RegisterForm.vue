@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { RegisterError } from '@/error/auth'
-import { AuthService } from '@/services/auth'
+import { ValidationError } from '@/error/api'
+import { register } from '@/services/auth'
 import { useUserStore } from '@/stores/user'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useField, useForm } from 'vee-validate'
@@ -37,11 +37,11 @@ const onSubmit = handleSubmit(async (values) => {
   isLoading.value = true
   errorMessage.value = null
   try {
-    const user = await AuthService.register(values)
+    const user = await register(values)
     store.setUser(user)
   } catch (error: any) {
     errorMessage.value = error.message ?? 'Something went wrong'
-    if (error instanceof RegisterError) {
+    if (error instanceof ValidationError) {
       setErrors(error.errors)
     }
   } finally {

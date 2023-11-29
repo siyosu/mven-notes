@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { AuthService } from '@/services/auth'
+import { login } from '@/services/auth'
 import { useUserStore } from '@/stores/user'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useField, useForm } from 'vee-validate'
@@ -27,7 +27,7 @@ const onSubmit = handleSubmit(async (values) => {
   isLoading.value = true
   errorMessage.value = null
   try {
-    const user = await AuthService.login(values)
+    const user = await login(values)
     store.setUser(user)
   } catch (error: any) {
     errorMessage.value = error.message ?? 'Something went wrong'
