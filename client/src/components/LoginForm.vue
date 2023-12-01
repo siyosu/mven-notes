@@ -6,6 +6,7 @@ import { useField, useForm } from 'vee-validate'
 import { ref } from 'vue'
 import { object, string } from 'zod'
 import { Alert, Button, Card, Input } from './base/index'
+import { useRoute } from 'vue-router'
 
 const validationSchema = toTypedSchema(
   object({
@@ -22,19 +23,21 @@ const { value: password } = useField<string>('password')
 const isLoading = ref(false)
 const errorMessage = ref<string | null>(null)
 
-const store = useUserStore()
+const user = useUserStore()
 const onSubmit = handleSubmit(async (values) => {
   isLoading.value = true
   errorMessage.value = null
   try {
-    const user = await login(values)
-    store.setUser(user)
+    const res = await login(values)
+    user.setUser(res)
   } catch (error: any) {
     errorMessage.value = error.message ?? 'Something went wrong'
   } finally {
     isLoading.value = false
   }
 })
+
+const route = useRoute()
 </script>
 
 <template>
@@ -43,6 +46,9 @@ const onSubmit = handleSubmit(async (values) => {
 
     <Alert class="mb-2" v-if="errorMessage" variant="danger" title="Failed to login">
       <p>{{ errorMessage }}</p>
+    </Alert>
+    <Alert class="mb-2" v-if="route.query.msg" variant="danger" title="Has been logged out">
+      <p>{{ route.query.msg }}</p>
     </Alert>
 
     <form @submit="onSubmit" class="mb-2 flex flex-col gap-2">

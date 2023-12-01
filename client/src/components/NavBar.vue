@@ -17,11 +17,6 @@ const user = useUserStore()
         >
       </li>
       <li class="flex rounded-md hover:bg-accent/50">
-        <RouterLink class="flex w-full items-center gap-2 px-2 py-1" :to="{ name: 'notes' }"
-          ><span class="text-lg"><FontAwesomeIcon icon="note-sticky" /></span>Notes</RouterLink
-        >
-      </li>
-      <li class="flex rounded-md hover:bg-accent/50">
         <button @click="user.logOut" class="flex w-full items-center gap-2 px-2 py-1">
           <span class="text-lg"><FontAwesomeIcon icon="right-from-bracket" /></span>Log out
         </button>

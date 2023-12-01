@@ -32,13 +32,13 @@ const { value: confirmPassword } = useField<string>('confirmPassword')
 const isLoading = ref(false)
 const errorMessage = ref<string | null>(null)
 
-const store = useUserStore()
+const user = useUserStore()
 const onSubmit = handleSubmit(async (values) => {
   isLoading.value = true
   errorMessage.value = null
   try {
-    const user = await register(values)
-    store.setUser(user)
+    const res = await register(values)
+    user.setUser(res)
   } catch (error: any) {
     errorMessage.value = error.message ?? 'Something went wrong'
     if (error instanceof ValidationError) {

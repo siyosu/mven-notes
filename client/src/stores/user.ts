@@ -22,7 +22,7 @@ export const useUserStore = defineStore('user', () => {
 
   const logOut = (message?: string) => {
     user.value = null
-    if (message) {
+    if (message && typeof message === 'string') {
       router.push({ name: 'login', query: { msg: message } })
     } else {
       router.push({ name: 'login' })
